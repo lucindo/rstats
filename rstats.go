@@ -130,7 +130,7 @@ func (stats *Stats) Kurtosis() float64 {
 	return 0.0
 }
 
-// String returns a printable string sumary of stats
+// String returns a printable string summary of stats
 func (stats *Stats) String() string {
 	return fmt.Sprintf("count %d min %.2f max %.2f mean %.2f (std dev %.3f variance %.2f) [skewness %.2f kurtosis %.2f]",
 		stats.Count(), stats.Min(), stats.Max(), stats.Mean(), stats.StandardDeviation(), stats.Variance(), stats.Skewness(), stats.Kurtosis())
