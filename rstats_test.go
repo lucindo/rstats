@@ -19,6 +19,7 @@ func inequalf(a, b float64) bool {
 func TestEmpty(t *testing.T) {
 	stats := rstats.New()
 	zero := float64(0.0)
+	stString := "count 0 min +Inf max -Inf mean 0.00 (std dev 0.000 variance 0.00) [skewness 0.00 kurtosis 0.00]"
 
 	if stats.Count() != 0 {
 		t.Error("Count of empty stats should be zero")
@@ -50,6 +51,10 @@ func TestEmpty(t *testing.T) {
 
 	if inequalf(stats.Kurtosis(), zero) {
 		t.Error("Kurtosis of empty should be equal to zero")
+	}
+
+	if stats.String() != stString {
+		t.Errorf("String of empty should be equal to:\n'%s'\nbut got:\n'%s'", stString, stats.String())
 	}
 }
 

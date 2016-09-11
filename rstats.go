@@ -1,4 +1,5 @@
-// Package rstats provides a simple and fast way to compute online statistics
+// Package rstats provides a simple and fast way to compute online statistics.
+//
 // Original C++ code from John D. Cook
 //
 // See more on: http://www.johndcook.com/blog/standard_deviation/
@@ -20,14 +21,14 @@ type Stats struct {
 	m1, m2, m3, m4 float64
 }
 
-// New returs a new instance of Stats
+// New get a new instance of Stats
 func New() *Stats {
 	stats := &Stats{}
 	stats.Reset()
 	return stats
 }
 
-// Add a data point to calculate statistics
+// Add a data point to compute statistics
 func (stats *Stats) Add(value float64) {
 	stats.lock.Lock()
 	defer stats.lock.Unlock()
@@ -59,7 +60,7 @@ func (stats *Stats) Reset() {
 	stats.m1, stats.m2, stats.m3, stats.m4 = 0.0, 0.0, 0.0, 0.0
 }
 
-// Count return the number of elements computed so far
+// Count returns the number of elements computed so far
 func (stats *Stats) Count() uint64 {
 	stats.lock.RLock()
 	defer stats.lock.RUnlock()
@@ -75,7 +76,7 @@ func (stats *Stats) Min() float64 {
 	return stats.min
 }
 
-// Max returns the man value added so far
+// Max returns the max value added so far
 func (stats *Stats) Max() float64 {
 	stats.lock.RLock()
 	defer stats.lock.RUnlock()
