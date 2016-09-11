@@ -2,6 +2,7 @@ package rstats_test
 
 import (
 	"math"
+	"math/rand"
 	"testing"
 
 	"github.com/lucindo/rstats"
@@ -50,6 +51,47 @@ func TestEmpty(t *testing.T) {
 	if inequalf(stats.Kurtosis(), zero) {
 		t.Error("Kurtosis of empty should be equal to zero")
 	}
+}
 
-	//fmt.Println(stats)
+func TestSameValue(t *testing.T) {
+	stats := rstats.New()
+	zero := float64(0.0)
+	random := rand.Float64()
+	count := uint64(10000)
+
+	for i := uint64(0); i < count; i++ {
+		stats.Add(random)
+	}
+
+	if stats.Count() != count {
+		t.Errorf("Count should be %d, got %d", count, stats.Count())
+	}
+
+	if inequalf(stats.Min(), random) {
+		t.Error("Min should be equal to random")
+	}
+
+	if inequalf(stats.Max(), random) {
+		t.Error("Max should be equal to random")
+	}
+
+	if inequalf(stats.Mean(), random) {
+		t.Error("Mean should be equal to random")
+	}
+
+	if inequalf(stats.Variance(), zero) {
+		t.Error("Variance should be equal to zero")
+	}
+
+	if inequalf(stats.StandardDeviation(), zero) {
+		t.Error("StandardDeviation should be equal to zero")
+	}
+
+	if inequalf(stats.Skewness(), zero) {
+		t.Error("Skewness should be equal to zero")
+	}
+
+	if inequalf(stats.Kurtosis(), zero) {
+		t.Error("Kurtosis should be equal to zero")
+	}
 }

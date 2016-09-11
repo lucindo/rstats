@@ -1,7 +1,7 @@
-// Package rstats provides a simple and fast way to compute statistics
-// online
-// Code from: http://www.johndcook.com/blog/standard_deviation/
-// and http://www.johndcook.com/blog/skewness_kurtosis/
+// Package rstats provides a simple and fast way to compute online statistics
+// Original C++ code from John D. Cook
+//
+// See more on: http://www.johndcook.com/blog/standard_deviation/
 package rstats
 
 import (
