@@ -114,7 +114,7 @@ func (stats *Stats) Skewness() float64 {
 	stats.lock.RLock()
 	defer stats.lock.RUnlock()
 
-	if stats.count > 0 {
+	if stats.count > 1 {
 		return math.Sqrt(float64(stats.count)) * stats.m3 / math.Pow(stats.m2, 1.5)
 	}
 	return 0.0
@@ -125,7 +125,7 @@ func (stats *Stats) Kurtosis() float64 {
 	stats.lock.RLock()
 	defer stats.lock.RUnlock()
 
-	if stats.count > 0 {
+	if stats.count > 1 {
 		return float64(stats.count)*stats.m4/(stats.m2*stats.m2) - 3.0
 	}
 	return 0.0
