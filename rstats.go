@@ -2,7 +2,9 @@
 //
 // Original C++ code from John D. Cook
 //
-// See more on: http://www.johndcook.com/blog/standard_deviation/
+// Read about the method on: http://www.johndcook.com/blog/standard_deviation/
+//
+// Examples on how to use it: https://github.com/lucindo/rstats/blob/master/README.md
 package rstats
 
 import (
