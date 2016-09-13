@@ -21,7 +21,7 @@ Get a new instance and push `float64` values to it with `Add` method:
 ```go
     stats := rstats.New()
     // ...
-    stats.Add(/*some value*)
+    stats.Add(/*some value*/)
 ```
 
 At any time you can call the methods to get statiscs:
@@ -92,7 +92,7 @@ This package also provides an auxiliary struct to serialize the statistics:
 ```go
     stats := rstats.New()
     // ...
-    stats.Add(/*some value*)
+    stats.Add(/*some value*/)
     // ...
 	statsStruct := new(rstats.StatsStruct)
 	rstats.GetStatsStruct(statsStruct, stats)
