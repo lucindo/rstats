@@ -19,7 +19,7 @@ func inequalf(a, b float64) bool {
 func TestEmpty(t *testing.T) {
 	stats := rstats.New()
 	zero := float64(0.0)
-	stString := "count 0 min +Inf max -Inf mean 0.00 (std dev 0.000 variance 0.00) [skewness 0.00 kurtosis 0.00]"
+	stString := "count 0 min +Inf max -Inf mean 0.00 (std dev 0.000 variance 0.00)"
 
 	if stats.Count() != 0 {
 		t.Error("Count of empty stats should be zero")
