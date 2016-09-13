@@ -100,3 +100,48 @@ func TestSameValue(t *testing.T) {
 		t.Error("Kurtosis should be equal to zero")
 	}
 }
+
+func TestStatsStruct(t *testing.T) {
+	stats := rstats.New()
+	random := rand.Float64()
+	count := uint64(10000)
+
+	for i := uint64(0); i < count; i++ {
+		stats.Add(random)
+	}
+
+	statsStruct := new(rstats.StatsStruct)
+	rstats.GetStatsStruct(statsStruct, stats)
+
+	if statsStruct.Count != stats.Count() {
+		t.Errorf("Count should be %d, got %d", statsStruct.Count, stats.Count())
+	}
+
+	if inequalf(statsStruct.Min, stats.Min()) {
+		t.Errorf("Min should be %f, got %f", statsStruct.Min, stats.Min())
+	}
+
+	if inequalf(statsStruct.Max, stats.Max()) {
+		t.Errorf("Max should be %f, got %f", statsStruct.Max, stats.Max())
+	}
+
+	if inequalf(statsStruct.Mean, stats.Mean()) {
+		t.Errorf("Mean should be %f, got %f", statsStruct.Mean, stats.Mean())
+	}
+
+	if inequalf(statsStruct.Variance, stats.Variance()) {
+		t.Errorf("Variance should be %f, got %f", statsStruct.Variance, stats.Variance())
+	}
+
+	if inequalf(statsStruct.StandardDeviation, stats.StandardDeviation()) {
+		t.Errorf("StandardDeviation should be %f, got %f", statsStruct.StandardDeviation, stats.StandardDeviation())
+	}
+
+	if inequalf(statsStruct.Skewness, stats.Skewness()) {
+		t.Errorf("Skewness should be %f, got %f", statsStruct.Skewness, stats.Skewness())
+	}
+
+	if inequalf(statsStruct.Kurtosis, stats.Kurtosis()) {
+		t.Errorf("Kurtosis should be %f, got %f", statsStruct.Kurtosis, stats.Kurtosis())
+	}
+}

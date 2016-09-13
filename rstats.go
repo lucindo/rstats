@@ -137,4 +137,28 @@ func (stats *Stats) String() string {
 		stats.Count(), stats.Min(), stats.Max(), stats.Mean(), stats.StandardDeviation(), stats.Variance(), stats.Skewness(), stats.Kurtosis())
 }
 
+// StatsStruct is a helper struct to hold values for serialization
+type StatsStruct struct {
+	Count             uint64
+	Min               float64
+	Max               float64
+	Mean              float64
+	Variance          float64
+	StandardDeviation float64
+	Skewness          float64
+	Kurtosis          float64
+}
+
+// GetStatsStruct fill the contents of StatsStruct with Stats data
+func GetStatsStruct(dest *StatsStruct, orig *Stats) {
+	dest.Count = orig.Count()
+	dest.Min = orig.Min()
+	dest.Max = orig.Max()
+	dest.Mean = orig.Mean()
+	dest.Variance = orig.Variance()
+	dest.StandardDeviation = orig.StandardDeviation()
+	dest.Skewness = orig.Skewness()
+	dest.Kurtosis = orig.Kurtosis()
+}
+
 // TODO: Implement Linear Regression: http://www.johndcook.com/blog/running_regression/
