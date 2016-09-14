@@ -102,6 +102,33 @@ func TestSameValue(t *testing.T) {
 	}
 }
 
+func TestBasic(t *testing.T) {
+	stats := rstats.New()
+
+	stats.Add(1.0)
+	stats.Add(2.0)
+
+	if inequalf(stats.Mean(), 1.5) {
+		t.Errorf("Mean should be 1.5, got %v", stats.Mean())
+	}
+
+	stats.Add(3)
+
+	if inequalf(stats.Mean(), 2.0) {
+		t.Errorf("Mean should be 2.0, got %v", stats.Mean())
+	}
+
+	if inequalf(stats.StandardDeviation(), 1) {
+		t.Errorf("StandardDeviation should be 1.0, got %v", stats.StandardDeviation())
+	}
+
+	if inequalf(stats.Variance(), 1) {
+		t.Errorf("Variance should be 1.0, got %v", stats.Variance())
+	}
+
+	// TODO: add more basic tests
+}
+
 func TestStatsStruct(t *testing.T) {
 	stats := rstats.New()
 	random := rand.Float64()
