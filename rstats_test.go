@@ -3,6 +3,7 @@ package rstats_test
 import (
 	"math"
 	"math/rand"
+	"sync"
 	"testing"
 
 	"github.com/lucindo/rstats"
@@ -143,5 +144,57 @@ func TestStatsStruct(t *testing.T) {
 
 	if inequalf(statsStruct.Kurtosis, stats.Kurtosis()) {
 		t.Errorf("Kurtosis should be %f, got %f", statsStruct.Kurtosis, stats.Kurtosis())
+	}
+}
+
+func TestConcurrency(t *testing.T) {
+	stats := rstats.New()
+	zero := float64(0.0)
+	random := rand.Float64()
+	count := uint64(1000)
+	gorotines := 100
+	var group sync.WaitGroup
+
+	for g := 0; g < gorotines; g++ {
+		group.Add(1)
+		go func(stats *rstats.Stats, group *sync.WaitGroup) {
+			for i := uint64(0); i < count; i++ {
+				stats.Add(random)
+			}
+			group.Done()
+		}(stats, &group)
+	}
+	group.Wait()
+
+	if stats.Count() != count*uint64(gorotines) {
+		t.Errorf("Count should be %d, got %d", count, stats.Count())
+	}
+
+	if inequalf(stats.Min(), random) {
+		t.Error("Min should be equal to random")
+	}
+
+	if inequalf(stats.Max(), random) {
+		t.Error("Max should be equal to random")
+	}
+
+	if inequalf(stats.Mean(), random) {
+		t.Error("Mean should be equal to random")
+	}
+
+	if inequalf(stats.Variance(), zero) {
+		t.Error("Variance should be equal to zero")
+	}
+
+	if inequalf(stats.StandardDeviation(), zero) {
+		t.Error("StandardDeviation should be equal to zero")
+	}
+
+	if inequalf(stats.Skewness(), zero) {
+		t.Error("Skewness should be equal to zero")
+	}
+
+	if inequalf(stats.Kurtosis(), zero) {
+		t.Error("Kurtosis should be equal to zero")
 	}
 }
