@@ -198,3 +198,10 @@ func TestConcurrency(t *testing.T) {
 		t.Error("Kurtosis should be equal to zero")
 	}
 }
+
+func BenchmarkStats(b *testing.B) {
+	stats := rstats.New()
+	for n := 0; n < b.N; n++ {
+		stats.Add(1.0)
+	}
+}
