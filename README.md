@@ -10,7 +10,7 @@
 
 ### Credits
 
-This is a Go port of C++ code by [John D. Cook](http://www.johndcook.com/) with minor improvements. Please check his great [blog post](http://www.johndcook.com/blog/standard_deviation/).
+This is a Go port of C++ code by [John D. Cook](http://www.johndcook.com/). Please check his great [blog post](http://www.johndcook.com/blog/standard_deviation/).
 
 The implementation uses the Welford method presented in Donald Knuth’s Art of Computer Programming, Vol 2, page 232, 3rd edition. Please refer to John D. Cook's post for a detailed explanation and references.
 
